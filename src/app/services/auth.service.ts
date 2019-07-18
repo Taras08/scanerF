@@ -15,7 +15,7 @@ const TOKEN_KEY = 'access_token';
 })
 
 export class AuthService {
-
+ 
     url = environment.url;
     user = null;
     authenticationState = new BehaviorSubject(false);
@@ -29,17 +29,18 @@ export class AuthService {
 
       checkToken(){
         this.storage.get(TOKEN_KEY).then( token => {
-           if (token) {
-             let decoded = this.helper.decodeToken(token);
-             let isExpired = this.helper.isTokenExpired(token);
-
-             if (!isExpired) {
-               this.user = decoded;
-               this.authenticationState.next(true);
-             } else {
-               this.storage.remove(TOKEN_KEY);
-             }
-           }
+           //if (token) {
+             
+            // let decoded = this.helper.decodeToken(token);
+            // let isExpired = this.helper.isTokenExpired(token);
+// 
+            // if (!isExpired) {
+              // this.user = decoded;
+              // this.authenticationState.next(true);
+            // } else {
+              // this.storage.remove(TOKEN_KEY);
+            // }
+          // }
         });
       }
 
@@ -56,9 +57,11 @@ export class AuthService {
       login(credentials) {
         return this.http.post(`${this.url}/api/login`, credentials).pipe(
           tap(res => {
-            this.storage.set(TOKEN_KEY, res['token']);
-            this.user = this.helper.decodeToken(res['token']);
-            this.authenticationState.next(true);
+            
+             this.storage.set(TOKEN_KEY, res.token);
+             this.user = this.helper.decodeToken(res.token);
+             console.log(this.user);
+             //this.authenticationState.next(true);
           }), 
           catchError( e => {
             this.showAlert(e.error.msg);
@@ -67,7 +70,7 @@ export class AuthService {
           );
         
      }
-     
+      
      logout() {
        this.storage.remove(TOKEN_KEY).then(() => {
          this.authenticationState.next(false);
