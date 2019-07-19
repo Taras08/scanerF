@@ -10,9 +10,15 @@ import { BehaviorSubject } from 'rxjs';
 const TOKEN_KEY = 'access_token';
 
 
+interface RespWithToken {
+  message : boolean,
+  token: string
+};
+
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class AuthService {
  
@@ -29,18 +35,18 @@ export class AuthService {
 
       checkToken(){
         this.storage.get(TOKEN_KEY).then( token => {
-           //if (token) {
-             
-            // let decoded = this.helper.decodeToken(token);
-            // let isExpired = this.helper.isTokenExpired(token);
-// 
-            // if (!isExpired) {
-              // this.user = decoded;
-              // this.authenticationState.next(true);
-            // } else {
-              // this.storage.remove(TOKEN_KEY);
-            // }
-          // }
+           if (token) {
+              
+            let decoded = this.helper.decodeToken(token);
+            let isExpired = this.helper.isTokenExpired(token);
+
+            if (!isExpired) {
+              this.user = decoded;
+              this.authenticationState.next(true);
+            } else {
+              this.storage.remove(TOKEN_KEY);
+            }
+          }
         });
       }
 
@@ -56,12 +62,10 @@ export class AuthService {
 
       login(credentials) {
         return this.http.post(`${this.url}/api/login`, credentials).pipe(
-          tap(res => {
-            
+          tap((res:RespWithToken) => {
              this.storage.set(TOKEN_KEY, res.token);
              this.user = this.helper.decodeToken(res.token);
-             console.log(this.user);
-             //this.authenticationState.next(true);
+             this.authenticationState.next(true);
           }), 
           catchError( e => {
             this.showAlert(e.error.msg);
@@ -91,7 +95,11 @@ export class AuthService {
      }
 
      isAuthenticated() {
-        return this.authenticationState.value;
+       let auth; 
+       this.authenticationState.subscribe(a => {
+         auth = a
+       });
+       return auth; 
      }
 
       showAlert(msg) {
