@@ -1,12 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>inside</ion-title>
+    <ion-title>{{fullName | async}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <p>{{ data }}</p>
-  <ion-button expand="full" (clic)= "loadSpecialInfo()">loadSpecialInfo</ion-button>
-  <ion-button expand="full" (clic)= "logout()"> Logout</ion-button>
-  <ion-button expand="full" (clic)= "Cleartoken()">Clear JWT</ion-button>
+  <ion-button expand="full" (clic)= "loadSpecialInfo()">Маршрут на сьогодні</ion-button>
+  <ion-button expand="full" (clic)= "logout()"> Мої торгові точки</ion-button>
+  <ion-button expand="full" (clic)= "Cleartoken()">Контакти</ion-button>
+  <ion-button expand="full" (clic)= "Cleartoken()">Памятка торгового представника</ion-button>
+  <ion-button expand="full" (clic)= "Cleartoken()">Настройки</ion-button>
 </ion-content>

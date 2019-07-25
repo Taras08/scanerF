@@ -19,7 +19,7 @@ export function jwtOptionsFacgtory(storage) {
       tokenGetter: () => {
         return storage.get('access_toen');
       },
-      whitelistedDomains: ['localhsot:5000']
+      whitelistedDomains: [' http://b0c86b78.ngrok.io']
    }
 }
 

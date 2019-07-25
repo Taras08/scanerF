@@ -10,11 +10,13 @@ import { Storage, IonicStorageModule} from '@ionic/storage';
 })
 export class InsidePage implements OnInit {
   data = '';
-  constructor( private authService: AuthService,private storage: Storage,  private toastController: ToastController
+  fullName: Promise<string> = null;
+  constructor( private authService: AuthService, private storage: Storage,  private toastController: ToastController
   ) { }
 
   ngOnInit() {
-    
+    this.fullName = this.authService.getFullName();
+  
   }
   
  loadSpecialInfo() {

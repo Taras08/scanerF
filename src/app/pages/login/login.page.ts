@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
     this.authService.login(this.credentialsForm.value).subscribe();
   }
 
+
   register() {
     this.authService.register(this.credentialsForm.value).subscribe( res => {
       this.authService.login(this.credentialsForm.value).subscribe();

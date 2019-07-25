@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Platform, AlertController} from '@ionic/angular';
 import { HttpClient} from '@angular/common/http';
 import { JwtHelperService} from '@auth0/angular-jwt';
@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { environment} from '../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { decode } from 'punycode';
 
 const TOKEN_KEY = 'access_token';
 
@@ -36,7 +37,6 @@ export class AuthService {
       checkToken(){
         this.storage.get(TOKEN_KEY).then( token => {
            if (token) {
-              
             let decoded = this.helper.decodeToken(token);
             let isExpired = this.helper.isTokenExpired(token);
 
@@ -48,6 +48,11 @@ export class AuthService {
             }
           }
         });
+      }
+
+      async getFullName() {
+        const token = await this.storage.get(TOKEN_KEY);
+        return this.helper.decodeToken(token).fullname;
       }
 
       register(credentials) {
@@ -66,6 +71,7 @@ export class AuthService {
              this.storage.set(TOKEN_KEY, res.token);
              this.user = this.helper.decodeToken(res.token);
              this.authenticationState.next(true);
+             
           }), 
           catchError( e => {
             this.showAlert(e.error.msg);
@@ -99,6 +105,7 @@ export class AuthService {
        this.authenticationState.subscribe(a => {
          auth = a
        });
+      
        return auth; 
      }
 
