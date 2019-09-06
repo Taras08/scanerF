@@ -9,7 +9,7 @@
 
       <ion-item>
           <ion-label position="floating">Email</ion-label>
-          <ion-input type="Email" formControlName="email" ></ion-input> 
+          <ion-input type="Email" formControlName="username" ></ion-input> 
       </ion-item> 
 
       <ion-item>
@@ -18,6 +18,21 @@
       </ion-item> 
   
       <ion-button expand='full' type="submit" [disabled]="!credentialsForm.valid">Авторізація</ion-button>
-     
+      
   </form>
+  
+  
+</ion-content>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let mission of (missions | async)">
+      <ion-label>
+        <h2>{{ mission.title }}</h2>
+        <p>{{ mission.reward | currency }}</p>
+      </ion-label>
+      <ion-icon slot="start" icon="rocket" color="primary"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>

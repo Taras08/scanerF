@@ -16,7 +16,7 @@ export class InsidePage implements OnInit {
 
   ngOnInit() {
     this.fullName = this.authService.getFullName();
-  
+    
   }
   
  loadSpecialInfo() {

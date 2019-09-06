@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,21 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
   credentialsForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['',[Validators.required, Validators.minLength(4)]]
+      
     });
-  }
 
+    
+  }
+ 
+  
   onSubmit() {
     this.authService.login(this.credentialsForm.value).subscribe();
   }

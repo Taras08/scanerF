@@ -52,7 +52,7 @@ export class AuthService {
 
       async getFullName() {
         const token = await this.storage.get(TOKEN_KEY);
-        return this.helper.decodeToken(token).fullname;
+        return this.helper.decodeToken(token).fullName;
       }
 
       register(credentials) {
@@ -81,6 +81,7 @@ export class AuthService {
         
      }
       
+     
      logout() {
        this.storage.remove(TOKEN_KEY).then(() => {
          this.authenticationState.next(false);
