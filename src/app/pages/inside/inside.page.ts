@@ -24,7 +24,7 @@ export class InsidePage implements OnInit {
        this.data = res['msg'];
     })
  }
-
+ 
   logout() {
    this.authService.logout();
   }

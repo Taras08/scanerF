@@ -13,7 +13,7 @@ const routes: Routes = [
     component: InsidePage
   }
 ];
-
+  
 @NgModule({
   imports: [
     CommonModule,

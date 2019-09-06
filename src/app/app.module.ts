@@ -22,7 +22,7 @@ export function jwtOptionsFacgtory(storage) {
       whitelistedDomains: ['http://10.10.4.12:5000']
    }
 }
-
+ 
 
 @NgModule({
   declarations: [AppComponent],

@@ -13,7 +13,7 @@ const routes: Routes = [
     component: LoginPage
   }
 ];
-
+ 
 @NgModule({
   imports: [
     CommonModule,
