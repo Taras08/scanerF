@@ -7,7 +7,7 @@
 <ion-content padding>
   <p>{{ data }}</p>
   <ion-button expand="full" (clic)= "loadSpecialInfo()">Маршрут на сьогодні</ion-button>
-  <ion-button expand="full" (clic)= "logout()"> Мої торгові точки</ion-button>
+  <ion-button expand="full" [routerLink] = "['point']" > Мої торгові точки</ion-button>
   <ion-button expand="full" (clic)= "loadSpecialInfo()">Контакти</ion-button>
   <ion-button expand="full" (clic)= "Cleartoken()">Памятка торгового представника</ion-button>
   <ion-button expand="full" (clic)= "Cleartoken()">Настройки</ion-button>

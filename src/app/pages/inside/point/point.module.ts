@@ -4,14 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { PointPage } from './point/point.page';
-import { InsidePage } from './inside.page';
+
+import { PointPage } from './point.page';
 
 const routes: Routes = [
-  { path: '', component: InsidePage},
-  { path: 'point', component : PointPage}
+  {
+    path: '',
+    component: PointPage
+  }
 ];
-  
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InsidePage, PointPage]
+  declarations: []
 })
-export class InsidePageModule {}
+export class PointPageModule {}
