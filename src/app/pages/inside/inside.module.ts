@@ -3,13 +3,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
+import {DataResolverService} from '../data-resolver.service';
+
 import { IonicModule } from '@ionic/angular';
-import { PointPage } from './point/point.page';
+import { PointsPage } from './points/points.page';
 import { InsidePage } from './inside.page';
 
+
 const routes: Routes = [
-  { path: '', component: InsidePage},
-  { path: 'point', component : PointPage}
+  { path: '', component: InsidePage , pathMatch: 'prefix'},
+  { path: 'point', component : PointsPage},
+  { 
+    path: 'point/:id',
+    resolve:{
+    special: DataResolverService
+   },
+   component : PointsPage}
 ];
   
 @NgModule({
@@ -19,6 +28,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InsidePage, PointPage]
+  declarations: [InsidePage, PointsPage]
 })
 export class InsidePageModule {}

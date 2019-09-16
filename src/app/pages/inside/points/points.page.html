@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Торгові точки</ion-title>
+    </ion-toolbar>
+  </ion-header>
+   
+  <ion-content padding>
+    <!-- <ion-list> -->
+      <!-- <ion-item *ngFor = 'let point of data'> -->
+        <!-- <ion-label> -->
+          <!-- <h3>{{point.namePoint}}</h3>   -->
+        <!-- </ion-label> -->
+        <!-- <ion-label slot='end'> -->
+            <!-- {{point.address}} -->
+          <!-- </ion-label> -->
+      <!-- </ion-item>   -->
+    <!-- </ion-list> -->
+
+    <ion-virtual-scroll [items]="data" [approxItemHeight]="'88px'">
+        <ion-item *virtualItem="let item">
+          <ion-label>
+          <h3>{{item.namePoint}}</h3>  
+        </ion-label>
+        <ion-label slot='end'>
+            {{item.address}}
+          </ion-label>
+        </ion-item>
+      </ion-virtual-scroll>
+
+  </ion-content>

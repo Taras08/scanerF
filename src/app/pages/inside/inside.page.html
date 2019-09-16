@@ -1,15 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{fullName | async}}</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title>{{user.fullName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <p>{{ data }}</p>
   <ion-button expand="full" (clic)= "loadSpecialInfo()">Маршрут на сьогодні</ion-button>
-  <ion-button expand="full" [routerLink] = "['point']" > Мої торгові точки</ion-button>
+  <ion-button expand="full" (click) = "getPoint(obj)" > Мої торгові точки</ion-button>
   <ion-button expand="full" (clic)= "loadSpecialInfo()">Контакти</ion-button>
   <ion-button expand="full" (clic)= "Cleartoken()">Памятка торгового представника</ion-button>
   <ion-button expand="full" (clic)= "Cleartoken()">Настройки</ion-button>
+  <ion-progress-bar *ngIf='!domloading' type="indeterminate"></ion-progress-bar>
 </ion-content>
  
+   
+
+ 
+    

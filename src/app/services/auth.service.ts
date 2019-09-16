@@ -6,7 +6,10 @@ import { Storage } from '@ionic/storage';
 import { environment} from '../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import {DataService} from './data.service';
 import { decode } from 'punycode';
+
+
 
 const TOKEN_KEY = 'access_token';
 
@@ -27,13 +30,16 @@ export class AuthService {
     user = null;
     authenticationState = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient, private helper: JwtHelperService,
+  constructor(
+    private http: HttpClient, 
+    private dataService: DataService,
+    private helper: JwtHelperService,
     private storage: Storage, private plt: Platform, private alertController: AlertController) {
       this.plt.ready().then(() => {
         this.checkToken();
       })
      }
-
+ 
       checkToken(){
         this.storage.get(TOKEN_KEY).then( token => {
            if (token) {
@@ -50,10 +56,6 @@ export class AuthService {
         });
       }
 
-      async getFullName() {
-        const token = await this.storage.get(TOKEN_KEY);
-        return this.helper.decodeToken(token).fullName;
-      }
 
       register(credentials) {
          return this.http.post(`${this.url}/api/register`, credentials).pipe(
@@ -64,21 +66,20 @@ export class AuthService {
            );
          
       }
-
+ 
       login(credentials) {
         return this.http.post(`${this.url}/api/login`, credentials).pipe(
           tap((res:RespWithToken) => {
              this.storage.set(TOKEN_KEY, res.token);
              this.user = this.helper.decodeToken(res.token);
+             this.dataService.setUser(this.user);
              this.authenticationState.next(true);
-             
           }), 
           catchError( e => {
             this.showAlert(e.error.msg);
              throw new Error(e);
            })
           );
-        
      }
       
      

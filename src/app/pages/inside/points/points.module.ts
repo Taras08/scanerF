@@ -5,15 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PointPage } from './point.page';
+import { PointsPage } from './points.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PointPage
+    component: PointsPage
   }
 ];
-
+ 
 @NgModule({
   imports: [
     CommonModule,
@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: []
 })
-export class PointPageModule {}
+export class PointsPageModule {}
