@@ -1,13 +1,15 @@
 import { Injectable, Input } from '@angular/core';
-import { Platform, AlertController} from '@ionic/angular';
+import { Platform, AlertController, LoadingController} from '@ionic/angular';
 import { HttpClient} from '@angular/common/http';
 import { JwtHelperService} from '@auth0/angular-jwt';
 import { Storage } from '@ionic/storage';
 import { environment} from '../environments/environment';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError,finalize } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import {DataService} from './data.service';
+import { HTTP } from '@ionic-native/http/ngx';
 import { decode } from 'punycode';
+import { load } from '@angular/core/src/render3';
 
 
 
@@ -25,12 +27,15 @@ interface RespWithToken {
  
 
 export class AuthService {
- 
+
+  public  inetrnet:boolean;
     url = environment.url;
     user = null;
     authenticationState = new BehaviorSubject(false);
 
   constructor(
+    private loadinCtrl: LoadingController,
+    private htt: HTTP,
     private http: HttpClient, 
     private dataService: DataService,
     private helper: JwtHelperService,
@@ -39,7 +44,12 @@ export class AuthService {
         this.checkToken();
       })
      }
- 
+
+     status(a) {
+       this.inetrnet = a;
+       console.log(a);
+     }
+
       checkToken(){
         this.storage.get(TOKEN_KEY).then( token => {
            if (token) {
@@ -67,21 +77,26 @@ export class AuthService {
          
       }
  
-      login(credentials) {
-        return this.http.post(`${this.url}/api/login`, credentials).pipe(
+      async login(credentials) {
+        // let loading = await this.loadinCtrl.create();
+        // await loading.present();
+        // finalize(() => loading.dismiss);
+     return this.http.post(`${this.url}/api/login`, credentials).pipe(
           tap((res:RespWithToken) => {
              this.storage.set(TOKEN_KEY, res.token);
              this.user = this.helper.decodeToken(res.token);
              this.dataService.setUser(this.user);
+
              this.authenticationState.next(true);
           }), 
           catchError( e => {
             this.showAlert(e.error.msg);
              throw new Error(e);
            })
-          );
+          ).subscribe();
      }
       
+   
      
      logout() {
        this.storage.remove(TOKEN_KEY).then(() => {
@@ -111,10 +126,20 @@ export class AuthService {
        return auth; 
      }
 
+    
       showAlert(msg) {
         let alert = this.alertController.create({
            message: msg,
-           header: 'Error',
+           header: 'Ошибка',
+           buttons: ['OK']
+        });
+        alert.then(alert => alert.present());
+      }
+
+      showAlert2(msg) {
+        let alert = this.alertController.create({
+           message: msg,
+           header: 'гуууд',
            buttons: ['OK']
         });
         alert.then(alert => alert.present());

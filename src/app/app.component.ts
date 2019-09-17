@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  public onlineOffline: boolean = navigator.onLine;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -28,8 +29,10 @@ export class AppComponent {
 
       this.auth.authenticationState.subscribe(state => {
         if (state) {
+          this.auth.status(this.onlineOffline);
           this.router.navigate(['inside']);
         } else {
+          this.auth.status(this.onlineOffline);
           this.router.navigate(['login']);
         }
 

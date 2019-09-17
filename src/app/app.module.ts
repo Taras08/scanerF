@@ -7,12 +7,13 @@ import {AuthGuardService} from './services/auth-guard.service';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Storage, IonicStorageModule} from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
+import { HTTP } from '@ionic-native/http/ngx';
 
 export function jwtOptionsFacgtory(storage) {
    return {
@@ -29,6 +30,7 @@ export function jwtOptionsFacgtory(storage) {
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
+    HttpModule,
     IonicStorageModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {
@@ -41,6 +43,7 @@ export function jwtOptionsFacgtory(storage) {
 
   ],
   providers: [
+    HTTP,
     StatusBar,
     SplashScreen,
     AuthGuardService,
