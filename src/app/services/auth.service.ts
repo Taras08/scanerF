@@ -7,7 +7,6 @@ import { environment} from '../environments/environment';
 import { tap, catchError,finalize } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import {DataService} from './data.service';
-import { HTTP } from '@ionic-native/http/ngx';
 import { decode } from 'punycode';
 import { load } from '@angular/core/src/render3';
 
@@ -35,7 +34,6 @@ export class AuthService {
 
   constructor(
     private loadinCtrl: LoadingController,
-    private htt: HTTP,
     private http: HttpClient, 
     private dataService: DataService,
     private helper: JwtHelperService,
@@ -45,10 +43,7 @@ export class AuthService {
       })
      }
 
-     status(a) {
-       this.inetrnet = a;
-       console.log(a);
-     }
+    
 
       checkToken(){
         this.storage.get(TOKEN_KEY).then( token => {
@@ -77,10 +72,8 @@ export class AuthService {
          
       }
  
-      async login(credentials) {
-        // let loading = await this.loadinCtrl.create();
-        // await loading.present();
-        // finalize(() => loading.dismiss);
+       login(credentials) {
+      
      return this.http.post(`${this.url}/api/login`, credentials).pipe(
           tap((res:RespWithToken) => {
              this.storage.set(TOKEN_KEY, res.token);
@@ -136,12 +129,5 @@ export class AuthService {
         alert.then(alert => alert.present());
       }
 
-      showAlert2(msg) {
-        let alert = this.alertController.create({
-           message: msg,
-           header: 'гуууд',
-           buttons: ['OK']
-        });
-        alert.then(alert => alert.present());
-      }
+      
     }

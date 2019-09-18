@@ -7,14 +7,6 @@ import {DataService} from '../../services/data.service';
 import { Observable } from 'rxjs';
 import {PointService} from './points/point.service';
 
-interface User {
-  fullName: string;
-readonly exp: number;
-readonly iat:number;
-readonly login:string;
-readonly sub:number;
-}
-
 @Component({  
   selector: 'app-inside',
   templateUrl: './inside.page.html',
@@ -68,9 +60,8 @@ domloading: boolean = true;
   }
 
  clearToken() {
-   //test
    this.storage.remove('access_token');
-   
+  
    let toast = this.toastController.create({
        message: 'JWT ',
        duration: 3000
