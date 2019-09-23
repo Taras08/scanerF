@@ -9,10 +9,7 @@
 
 <ion-content padding>
   <ion-button expand="full" (clic)= "loadSpecialInfo()">Маршрут на сьогодні</ion-button>
-  <ion-button expand="full" (click) = "getPoint(obj)" > Мої торгові точки</ion-button>
-  <ion-button expand="full" (clic)= "loadSpecialInfo()">Контакти</ion-button>
-  <ion-button expand="full" (clic)= "Cleartoken()">Памятка торгового представника</ion-button>
-  <ion-button expand="full" (clic)= "Cleartoken()">Настройки</ion-button>
+  <ion-button expand="full" (click) = "getPoint()" > Мої торгові точки</ion-button>
   <ion-progress-bar *ngIf='!domloading' type="indeterminate"></ion-progress-bar>
 </ion-content>
  
