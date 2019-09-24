@@ -16,6 +16,10 @@ const routes: Routes = [
   loadChildren: './pages/inside/points/points.module#PointsPageModule',
   canActivate: [AuthGuardService] },
 
+  // { path: 'documents', loadChildren: './pages/inside/documents/documents.module#DocumentsPageModule',
+  // canActivate: [AuthGuardService] },
+
+
 ];
 
 @NgModule({

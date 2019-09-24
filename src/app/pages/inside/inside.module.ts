@@ -8,11 +8,13 @@ import {DataResolverService} from '../data-resolver.service';
 import { IonicModule } from '@ionic/angular';
 import { PointsPage } from './points/points.page';
 import { InsidePage } from './inside.page';
+import {DocumentsPage} from './documents/documents.page';
 
 
 const routes: Routes = [
   { path: '', component: InsidePage , pathMatch: 'prefix'},
   { path: 'point', component : PointsPage},
+  { path: 'document', component : DocumentsPage},
   { 
     path: 'point/:id',
     resolve:{
@@ -28,6 +30,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InsidePage, PointsPage]
+  declarations: [InsidePage, PointsPage, DocumentsPage]
 })
 export class InsidePageModule {}

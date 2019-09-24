@@ -6,7 +6,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import {DataService} from '../../services/data.service';
 import { Observable } from 'rxjs';
 import {PointService} from './points/point.service';
-
+import * as user from './user';
 @Component({  
   selector: 'app-inside',
   templateUrl: './inside.page.html',
@@ -32,8 +32,11 @@ domloading: boolean = true;
 
   
   ngOnInit() {
-    this.dataService.getUser().then(
-      res => { this.user = res}
+    
+    this.dataService.getUser().then( res =>
+       { this.user = res;
+      user.user["login"] = this.user.login;
+    }
     );
   }
 
@@ -45,9 +48,12 @@ domloading: boolean = true;
         this.domloading = true;
       } 
     )
-    
-     
   }
+    getDocument() {
+      this.domloading = false;
+      this.router.navigate(['inside/document']),
+      this.domloading = true;  
+    }
   
  loadSpecialInfo() {
     this.authService.getSpecialData().subscribe( res => {
