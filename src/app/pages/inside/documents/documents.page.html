@@ -8,6 +8,7 @@
         <ion-datetime [pickerOptions]="customPickerOption" displayFormat = "DD MMMM YYYY" 
         [(ngModel)]="Date" placeholder="Дата"  min="2015"></ion-datetime>
     </ion-item>
+   
   </ion-toolbar>
   
   
@@ -15,6 +16,28 @@
 </ion-header>
 
 <ion-content>
+    <ngx-datatable 
+    [ngClass]="tablestyle" 
+    [rows]="documents"
+    [columnMode]="'force'" 
+    [headerHeight]="50" 
+    [rowHeight]="'auto'" 
+    [rowClass]="getRowClass.bind(this)">
+
+      <ngx-datatable-column name="id Doc" prop="number"></ngx-datatable-column>
+      <ngx-datatable-column name="Клієнт" prop="client" ></ngx-datatable-column>
+      <ngx-datatable-column name="Сумма" prop="summa"></ngx-datatable-column>
+      <ngx-datatable-column name="Дата доставки" prop="dateDoc"></ngx-datatable-column>
+      <ngx-datatable-column name="Створенний" prop="createDoc"></ngx-datatable-column>
+      
+      
+   
+      <ngx-datatable-column name="Деталі" prop="Actions" sortable="false" prop="name">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <ion-button size="small" fill="outline" (click)="open(row)">Деталі</ion-button>
+        </ng-template>
+      </ngx-datatable-column>
+   
+    </ngx-datatable>
 
 </ion-content>
-і

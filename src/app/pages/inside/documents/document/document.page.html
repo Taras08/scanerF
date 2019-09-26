@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-title>Замовлення - {{client}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ngx-datatable 
+    [ngClass]="tablestyle" 
+    [rows]="document"
+    [columnMode]="'force'" 
+    [headerHeight]="50" 
+    [rowHeight]="'auto'" 
+    [rowClass]="getRowClass.bind(this)">
+
+      <ngx-datatable-column name="№" prop="number"></ngx-datatable-column>
+      <ngx-datatable-column name="Товар" prop="sku" ></ngx-datatable-column>
+      <ngx-datatable-column name="Кількість" prop="quantity"></ngx-datatable-column>
+      <ngx-datatable-column name="Цінна" prop="price"></ngx-datatable-column>
+      <ngx-datatable-column name="Сумма" prop="summa"></ngx-datatable-column>
+      
+         
+    </ngx-datatable>
+
+</ion-content>
+
+
+
+
+<ion-footer>
+  <ion-toolbar color='primary'>
+      <ion-button expand="full" fill="clear" color="light" (click)="closeDocument">
+        Назад
+      </ion-button>
+          
+  </ion-toolbar>
+</ion-footer>
