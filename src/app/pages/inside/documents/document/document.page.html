@@ -1,24 +1,25 @@
 <ion-header>
   <ion-toolbar>
     
-    <ion-title>Замовлення - {{client}}</ion-title>
+    <ion-title> {{client}}</ion-title>
+    <ion-item>Замовлення від:  {{date | date: "dd.MM.yyyy" }}</ion-item>          
   </ion-toolbar>
 </ion-header>
-
+ 
 <ion-content>
     <ngx-datatable 
     [ngClass]="tablestyle" 
     [rows]="document"
-    [columnMode]="'force'" 
+    [columnMode]="ColumnMode.flex"
     [headerHeight]="50" 
     [rowHeight]="'auto'" 
     [rowClass]="getRowClass.bind(this)">
 
-      <ngx-datatable-column name="№" prop="number"></ngx-datatable-column>
-      <ngx-datatable-column name="Товар" prop="sku" ></ngx-datatable-column>
-      <ngx-datatable-column name="Кількість" prop="quantity"></ngx-datatable-column>
-      <ngx-datatable-column name="Цінна" prop="price"></ngx-datatable-column>
-      <ngx-datatable-column name="Сумма" prop="summa"></ngx-datatable-column>
+      <ngx-datatable-column name="№" prop="number" [flexGrow] = "1" ></ngx-datatable-column>
+      <ngx-datatable-column name="Товар" prop="sku" [flexGrow] = "5"></ngx-datatable-column>
+      <ngx-datatable-column name="Кількість" prop="quantity" [flexGrow] = "2"></ngx-datatable-column>
+      <ngx-datatable-column name="Цінна" prop="price" [flexGrow] = "2"></ngx-datatable-column>
+      <ngx-datatable-column name="Сумма" prop="summa" [flexGrow] = "2"></ngx-datatable-column>
       
          
     </ngx-datatable>
@@ -30,9 +31,7 @@
 
 <ion-footer>
   <ion-toolbar color='primary'>
-      <ion-button expand="full" fill="clear" color="light" (click)="closeDocument">
-        Назад
-      </ion-button>
-          
+      <ion-item color='primary'>Загальна Сумма: {{summa}}</ion-item>
+      <ion-item color='primary'>Позицій: {{kl}}</ion-item>          
   </ion-toolbar>
 </ion-footer>

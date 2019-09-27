@@ -3,6 +3,7 @@ import {DocumentsService} from './documents.service';
 import { AlertController } from '@ionic/angular'
 import { ModalController } from '@ionic/angular';
 import { DocumentPage } from './document/document.page';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-documents',
@@ -11,6 +12,7 @@ import { DocumentPage } from './document/document.page';
 })
 export class DocumentsPage implements OnInit {
 
+ColumnMode = ColumnMode;
 Date: any ;
 private documents :any[] ;  
 tablestyle = 'bootstrap';
@@ -46,6 +48,7 @@ customPickerOption: any;
   }
 
  
+ 
   getRowClass(row) {
     const isMale = row.gender == 'male';
     if (!this.customRowClass) {
@@ -56,13 +59,17 @@ customPickerOption: any;
       'female-row': !isMale
     }
   }
+ 
 
   async open(row) {
+
     this.documentService.createDocument(row);
     const modal = await this.modalController.create({
       component: DocumentPage,
       componentProps: {
         'client': row.client,
+        'summa' : row.summa,
+        'date'  : new Date(row.dateDoc)
       }
     });
      modal.present();

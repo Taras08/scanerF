@@ -51,7 +51,7 @@ domloading: boolean = true;
   }
     getDocument() {
       this.domloading = false;
-      this.router.navigate(['inside/document']),
+      this.router.navigate(['inside/documents']),
       this.domloading = true;  
     }
   

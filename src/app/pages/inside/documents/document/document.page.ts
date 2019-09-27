@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import {DocumentsService} from '../documents.service';
-
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-document',
@@ -10,8 +10,11 @@ import {DocumentsService} from '../documents.service';
 })
 export class DocumentPage implements OnInit {
   @Input() client: string;
-
-  private document :any[] ;  
+  @Input() summa: string;
+  @Input() date: any;
+  ColumnMode = ColumnMode;
+  private document :any[] ; 
+  private kl:number  ; 
   customRowClass = false;
   tablestyle = 'bootstrap';
 
@@ -25,6 +28,7 @@ export class DocumentPage implements OnInit {
     const documentObservable = this.documentService.getDocument();
     documentObservable.subscribe((doc: any[])=>{        
     this.document = doc;
+    this.kl = doc.length ;
      
     })
   }

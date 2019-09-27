@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -14,6 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { Storage, IonicStorageModule} from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { HTTP } from '@ionic-native/http/ngx';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+
+
+
 
 export function jwtOptionsFacgtory(storage) {
    return {
@@ -31,6 +36,7 @@ export function jwtOptionsFacgtory(storage) {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
     HttpModule,
+    NgxDatatableModule ,
     IonicStorageModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {
