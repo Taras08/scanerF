@@ -11,15 +11,15 @@ import { Observable, generate } from 'rxjs';
 export class DocumentsService {
   url = environment.url;
   data: any;
-  documentsArr: any;
-  documentArr: any;
+  documentsArr: any[];
+  documentArr: any[];
 
   constructor(private http: HttpClient) { }
 
   public createDocuments (date):any  {
     user.user["date"] =  date;    
-    this.http.post(`${this.url}/inside/documents`, user.user).subscribe(res => {
-      this.documentsArr = res ;
+    this.http.post(`${this.url}/inside/documents`, user.user).subscribe((res: any[]) => {     
+      res.length > 1 ? this.documentsArr = res : this.documentsArr = [res];
       })
    }
 
@@ -40,8 +40,8 @@ public createDocument (row):any  {
     "row" : ""
   };
   data["row"] = row.number + "#" + createdate;
-  this.http.post(`${this.url}/inside/document`, data).subscribe(res => {
-    this.documentArr = res ;
+  this.http.post(`${this.url}/inside/document`, data).subscribe((res:any[]) => {
+    res.length > 1 ? this.documentArr = res : this.documentArr = [res];
     })
  }
 

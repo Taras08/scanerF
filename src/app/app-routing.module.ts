@@ -14,7 +14,9 @@ const routes: Routes = [
   },
   { path: 'points', 
   loadChildren: './pages/inside/points/points.module#PointsPageModule',
-  canActivate: [AuthGuardService] },  { path: 'document', loadChildren: './pages/inside/documents/document/document.module#DocumentPageModule' },
+  canActivate: [AuthGuardService] },
+  { path: 'document', loadChildren: './pages/inside/documents/document/document.module#DocumentPageModule' },
+  
 
 
   // { path: 'documents', loadChildren: './pages/inside/documents/documents.module#DocumentsPageModule',

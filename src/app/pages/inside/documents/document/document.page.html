@@ -1,8 +1,11 @@
 <ion-header>
-  <ion-toolbar>
     
+  <ion-toolbar>
     <ion-title> {{client}}</ion-title>
     <ion-item>Замовлення від:  {{date | date: "dd.MM.yyyy" }}</ion-item>          
+    <ion-button class="round"  (click) = "closeDocument()" slot='secondary'>
+      <ion-icon name="close"></ion-icon>
+  </ion-button>
   </ion-toolbar>
 </ion-header>
  

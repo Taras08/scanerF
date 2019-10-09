@@ -11,13 +11,13 @@ import { PointsPage } from './points/points.page';
 import { InsidePage } from './inside.page';
 import {DocumentsPage} from './documents/documents.page';
 import {DocumentPage} from './documents/document/document.page';
- 
-
+import { PointsPopoverComponent} from './points/points-popover/points-popover.component'; 
+import {PageComponent} from './points/page/page.component';
 const routes: Routes = [
   { path: '', component: InsidePage , pathMatch: 'prefix'},
   { path: 'point', component : PointsPage},
   { path: 'documents', component : DocumentsPage},
-  { 
+  {  
     path: 'point/:id',
     resolve:{
     special: DataResolverService
@@ -33,7 +33,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [DocumentPage],
-  declarations: [InsidePage, PointsPage, DocumentsPage,DocumentPage]
+  entryComponents: [DocumentPage,
+  PointsPopoverComponent,PageComponent],
+  declarations: [InsidePage, PointsPage,PointsPopoverComponent,PageComponent, DocumentsPage,DocumentPage]
 })
 export class InsidePageModule {}

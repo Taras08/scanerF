@@ -33,6 +33,7 @@
     "cordova-android": "^8.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-advanced-http": "^2.1.1",
+    "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-networkinterface": "^2.0.0",
     "cordova-sqlite-storage": "^3.2.1",
     "core-js": "^2.5.4",
@@ -89,7 +90,9 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-advanced-http": {},
+      "cordova-plugin-advanced-http": {
+        "OKHTTP_VERSION": "3.10.0"
+      },
       "cordova-plugin-networkinterface": {}
     },
     "platforms": [

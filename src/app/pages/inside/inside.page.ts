@@ -16,9 +16,7 @@ import * as user from './user';
 export class InsidePage implements OnInit {
   data = '';
   user:any = { };
-  objLogin = {
-    "login" : ""
-};
+  
 domloading: boolean = true;
 
   constructor( private authService: AuthService,
@@ -32,22 +30,22 @@ domloading: boolean = true;
 
   
   ngOnInit() {
-    
     this.dataService.getUser().then( res =>
        { this.user = res;
       user.user["login"] = this.user.login;
-    }
+     }
     );
+    
   }
 
    getPoint() {
     this.domloading = false;
-    this.objLogin = {["login"] : this.user.login};
-    this.pointService.setPoint(this.objLogin).then(
+    this.pointService.setPoint(user.user).then(
         rez =>{ this.router.navigate(['inside/point']),
         this.domloading = true;
       } 
     )
+    this.pointService.setPrice();
   }
     getDocument() {
       this.domloading = false;

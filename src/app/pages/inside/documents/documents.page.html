@@ -5,8 +5,9 @@
         </ion-buttons>
     <ion-title>Оформлені документи</ion-title>
     <ion-item slot='end' color="primary">
-        <ion-datetime [pickerOptions]="customPickerOption" displayFormat = "DD MMMM YYYY" 
-        [(ngModel)]="Date" placeholder="Дата"  min="2015"></ion-datetime>
+        <ion-datetime [pickerOptions]="customPickerOption" 
+        displayFormat = "DD MMMM YYYY" 
+        [(ngModel)]="myDate" placeholder="Дата"  min="2015"></ion-datetime>
     </ion-item>
    
   </ion-toolbar>
@@ -22,18 +23,21 @@
     [columnMode]="ColumnMode.flex"
     [headerHeight]="50" 
     [rowHeight]="'auto'" 
-    [rowClass]="getRowClass.bind(this)">
-    
-   
-      <ngx-datatable-column name="id Doc" prop="number" [flexGrow] = "1"></ngx-datatable-column>
-      <ngx-datatable-column name="Клієнт" prop="client" [flexGrow] = "5" > </ngx-datatable-column>
+    [rowClass]="getRowClass.bind(this)"
+    (activate) ="onDetailToggle($event)"
+   >
+
+      <ngx-datatable-column name="id" prop="number" [flexGrow] = "2"></ngx-datatable-column>
+      <ngx-datatable-column name="Клієнт" prop="client" [flexGrow] = "4" cellClass="table-column" > </ngx-datatable-column>
       <ngx-datatable-column name="Сумма" prop="summa" [flexGrow] = "2" ></ngx-datatable-column>
-      <ngx-datatable-column name="Дата доставки" prop="dateDoc" [flexGrow] = "2" ></ngx-datatable-column>
-      <ngx-datatable-column name="Створенний" prop="createDoc" [flexGrow] = "2" ></ngx-datatable-column>
-   
-      <ngx-datatable-column name="Деталі" prop="Actions" sortable="false" prop="name" [flexGrow] = "2">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <ion-button size="small" fill="outline" (click)="open(row)">Деталі</ion-button>
+      <ngx-datatable-column name="Дата доставки"  [flexGrow] = "2" >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.dateDoc | date:"dd MM yyyy"}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Створенний"  [flexGrow] = "2" >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.createDoc | date:"dd MM yyyy"}}
         </ng-template>
       </ngx-datatable-column>
       

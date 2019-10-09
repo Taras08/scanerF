@@ -33,10 +33,11 @@ export class DocumentPage implements OnInit {
     })
   }
 
+ 
+
+
   closeDocument() {
-  this.modalController.dismiss({
-    'dismissed': false
-  })   ;
+  this.modalController.dismiss() ;
   }
 
   getRowClass(row) {

@@ -24,15 +24,17 @@ export class LoginPage implements OnInit {
       username: ['', [Validators.required]],
       password: ['',[Validators.required, Validators.minLength(4)]]
     
-      
+     
     });
-
+    this.authService.checkToken();
   }
  
  
 
   async onSubmit() {
+    
  let loading = await this.loadinCtrl.create();
+
  await loading.present();
   await   this.authService.login(this.credentialsForm.value);
   loading.dismiss();

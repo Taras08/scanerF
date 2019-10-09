@@ -11,7 +11,7 @@ import { ColumnMode } from '@swimlane/ngx-datatable';
   styleUrls: ['./documents.page.scss'],
 })
 export class DocumentsPage implements OnInit {
-
+myDate: any ;
 ColumnMode = ColumnMode;
 Date: any ;
 private documents :any[] ;  
@@ -26,20 +26,21 @@ customPickerOption: any;
       buttons: [{
         text: 'Зберегти',
         handler: (date: any) => {
-         this.Date = date.day.value + "/" + date.month.value + "/" + date.year.value;
+          this.Date = date.day.value + "/" + date.month.value + "/" + date.year.value;
+         this.myDate = date.month.value + "/" + date.day.value + "/" + date.year.value;
+         
          this.documentService.createDocuments(this.Date);
          const documentObservable = this.documentService.getDocuments();
          documentObservable.subscribe((doc)=>{
            this.documents = doc;
+        
          })
         }
       }, {
         text: 'Вихід',
         role: 'cancel'
   
-      }],
-      columns:[
-      ]
+      }]
     };
    
    }
@@ -47,7 +48,6 @@ customPickerOption: any;
   ngOnInit() {
   }
 
- 
  
   getRowClass(row) {
     const isMale = row.gender == 'male';
@@ -59,7 +59,13 @@ customPickerOption: any;
       'female-row': !isMale
     }
   }
- 
+
+  onDetailToggle(event ) {
+    if (event.type == 'click') {
+        this.open(event.row);
+    }
+    
+  }
 
   async open(row) {
 
@@ -71,7 +77,8 @@ customPickerOption: any;
         'summa' : row.summa,
         'date'  : new Date(row.dateDoc)
       }
-    });
+    }
+    );
      modal.present();
   }
   

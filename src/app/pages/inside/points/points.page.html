@@ -7,17 +7,18 @@
     </ion-toolbar>
   </ion-header>
    
-  <ion-content padding>
+  <ion-content >
 
 
-    <ion-virtual-scroll [items]="data" [approxItemHeight]="'88px'">
-        <ion-item *virtualItem="let item">
-          <ion-label>
-          <h3>{{item.namePoint}}</h3>  
+    <ion-virtual-scroll 	 [items]="data" [approxItemHeight]="'88px'">
+        <ion-item lines="full"  *virtualItem="let item" >
+             <ion-label>
+          <h3>{{item.name}}</h3>  
         </ion-label>
-        <ion-label slot='end'>
-            {{item.address}}
-          </ion-label>
+           
+        <ion-icon name="alert" class="iconPoints" (click)="info(item)" ></ion-icon>
+        <ion-icon name="create"  (click)="create(item)" ></ion-icon>
+      
         </ion-item>
       </ion-virtual-scroll>
 

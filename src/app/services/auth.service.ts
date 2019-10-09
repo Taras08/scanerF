@@ -50,7 +50,6 @@ export class AuthService {
            if (token) {
             let decoded = this.helper.decodeToken(token);
             let isExpired = this.helper.isTokenExpired(token);
-
             if (!isExpired) {
               this.user = decoded;
               this.authenticationState.next(true);
