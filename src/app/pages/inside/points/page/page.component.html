@@ -11,7 +11,7 @@
           Дата доставки:
         </ion-label> 
   <ion-datetime 
-    displayFormat = "DD MMMM YYYY" min = "date" value = "date" [(ngModel)]="date" 
+    displayFormat = "DD MMMM YYYY" min = {{date}}  [(ngModel)]="date" 
       ></ion-datetime>
   </ion-item>
 </ion-item>
@@ -24,6 +24,35 @@
  
 <ion-content>
    
+    <ion-list>
+        <ion-list-header>Multiple Selection</ion-list-header>
+         
+        <ion-item>
+            <ion-label>Вид продукта</ion-label>
+            <ion-select [interfaceOptions]="customActionSheetOptions" 
+            interface="action-sheet" (ionChange)="onChange($event)" placeholder="Молоко" >
+              <ion-select-option *ngFor="let tPrice of typePrice$" value = {{tPrice.code}}  >{{tPrice?.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        <ion-item *ngIf='availabilityProductType'>
+            <ion-label>Продукт</ion-label>
+            <ion-select multiple="true"  cancelText="Скасувати" okText="Добавить" (ionChange)="test($event)">
+              <ion-select-option *ngFor="let price of price$">{{price["tov-nam"]}}</ion-select-option>
+            </ion-select>
+            
+          </ion-item>
+
+          <ion-item *ngIf='!availabilityProductType'>
+              <ion-label>На данний момент товар данного типу відсутній</ion-label>
+          </ion-item>
+
+       
+   
+      </ion-list>
+
+
+      
 
 </ion-content>
 

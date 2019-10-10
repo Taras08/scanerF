@@ -11,6 +11,7 @@ export class PointService {
   data;
   url = environment.url;
   arr ;
+  price:any[];
   constructor(private http: HttpClient) { }
 
     setPoint(obj) { 
@@ -32,9 +33,13 @@ export class PointService {
      }
 
      setPrice() {
-       this.http.get(`${this.url}/inside/price`).subscribe(res => {
-         console.log(res)
+       this.http.get(`${this.url}/inside/price`).subscribe((res:any[]) => {
+         this.price = res;
        })
+     }
+
+     getPrice() {
+       return this.price
      }
  
 }
