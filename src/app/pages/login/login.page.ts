@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Platform, LoadingController } from '@ionic/angular';
-
+import * as factories from './../factories';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { Platform, LoadingController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  factories$ = factories.factories;
   credentialsForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
     private plt: Platform,
@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
     this.credentialsForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['',[Validators.required, Validators.minLength(4)]]
+
     
      
     });

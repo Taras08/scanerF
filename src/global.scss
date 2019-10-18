@@ -13,3 +13,8 @@
 @import '~@swimlane/ngx-datatable/themes/material.scss';
 @import '~@swimlane/ngx-datatable/themes/bootstrap.css';
 @import '~@swimlane/ngx-datatable/assets/icons.css';
+
+ion-alert.dropdown{
+    --min-width:100%;
+    
+}

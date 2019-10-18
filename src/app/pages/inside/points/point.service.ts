@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import { reject } from 'q';
-
+import * as user from './../user';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,19 @@ export class PointService {
 
      getPrice() {
        return this.price
+     }
+
+     sendOrder(date, namePoint, listOrder){
+       const order = {
+         'user': user.user.login,
+         'date': date,
+         'namePoint': namePoint,
+         'listOrder':listOrder
+       };
+       this.http.post(`${this.url}/inside/order`, order).subscribe(res => {
+      
+      });
+
      }
  
 }
